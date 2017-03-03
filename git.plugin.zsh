@@ -33,10 +33,18 @@
 #   fi
 # }
 #
+
+#
+# new aliases
+#
+# (g)it (f)etch (m)erge including (S)ubmodule
+alias gfmS='git pull && git submodule update --init --recursive'
+
 #
 # Aliases
 # (sorted alphabetically)
 #
+
 
 alias g='git'
 
