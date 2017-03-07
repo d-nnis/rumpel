@@ -5,8 +5,7 @@
 #
 # Functions
 #
-
-source git.zsh
+source "${0:h}/git.zsh"
 
 # The name of the current branch
 # Back-compatibility wrapper for when this function was defined here in
@@ -40,7 +39,9 @@ source git.zsh
 # new aliases
 #
 # (g)it (f)etch (m)erge including (S)ubmodule
-alias gfmS='git pull && git submodule update --init --recursive'
+# submodule update: only clone missing (not fetch/ pull)
+#alias gfmS='git pull && git submodule update --init --recursive'
+alias gfmSfm='git pull && git submodule foreach pull origin master'
 
 #
 # Aliases
