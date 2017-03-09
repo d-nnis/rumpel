@@ -39,9 +39,10 @@ source "${0:h}/git.zsh"
 # new aliases
 #
 # (g)it (f)etch (m)erge including (S)ubmodule
-# submodule update: only clone missing (not fetch/ pull)
-#alias gfmS='git pull && git submodule update --init --recursive'
-alias gfmSfm='git pull && git submodule foreach pull origin master'
+## So this command to get the status of last pushed commit: git pull && git submodule update --init --recursive
+## +git pull && git submodule foreach pull origin master+ would fetch, merge and checkout the newest commit from upstream, even if the registered commit in the supermodule (containing repo) ist different.
+alias gfmS='git pull && git submodule update --init --recursive'
+#alias gfmSfm='git pull && git submodule foreach pull origin master'
 
 #
 # Aliases
