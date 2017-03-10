@@ -5,7 +5,8 @@
 #
 # Functions
 #
-source "${0:h}/git.zsh"
+source "${0:h}/git.functions.zsh"
+source "${0:h}/helper.zsh"
 
 # The name of the current branch
 # Back-compatibility wrapper for when this function was defined here in
@@ -187,8 +188,10 @@ alias glgga='git log --graph --decorate --all'
 alias glgm='git log --graph --max-count=10'
 alias glo='git log --oneline --decorate'
 alias glol="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias glols="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all -n$(nocommits)"
 alias glola="git log --graph --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
 alias glog='git log --oneline --decorate --graph'
+alias glogs="git log --oneline --decorate --graph --all -n$(nocommits)"
 alias gloga='git log --oneline --decorate --graph --all'
 alias glp="_git_log_prettily"
 compdef _git glp=git-log
