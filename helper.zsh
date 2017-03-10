@@ -7,3 +7,25 @@ function nocommits() {
   echo $nocommits
 }
 
+mkcd() {
+    if [[ $1 == -* ]]; then
+        mkdir -p $1 $2
+        cd $2
+    else
+        mkdir -p $1
+        cd $1
+    fi
+}
+
+hardcopy() {
+  prog=$(shift $@)
+  if [ -z $prog ]; then
+    echo give an installed program as first argument
+    exit 1
+  fi
+  echo $prog
+  echo $@
+  exit 1
+  man -t $prog | lpr $@
+}
+
