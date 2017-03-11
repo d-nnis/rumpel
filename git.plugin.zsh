@@ -44,8 +44,9 @@ function work_in_progress() {
 ## +git pull && git submodule foreach pull origin master+ would fetch, merge and checkout the newest commit from upstream, even if the registered commit in the supermodule (containing repo) ist different.
 alias gfmS='git pull && git submodule update --init --recursive'
 #alias gfmSfm='git pull && git submodule foreach pull origin master'
+alias gpOG='git push origin master && git push gitspace master'
 
-#
+
 # Aliases
 # (sorted alphabetically)
 #
