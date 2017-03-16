@@ -42,9 +42,9 @@ function work_in_progress() {
 # (g)it (f)etch (m)erge including (S)ubmodule
 ## So this command to get the status of last pushed commit: git pull && git submodule update --init --recursive
 ## +git pull && git submodule foreach pull origin master+ would fetch, merge and checkout the newest commit from upstream, even if the registered commit in the supermodule (containing repo) ist different.
-alias gfmS='git pull && git submodule update --init --recursive'
+alias gfmS='git pull -v && git submodule update --init --recursive'
 #alias gfmSfm='git pull && git submodule foreach pull origin master'
-alias gpOG='git push origin master && git push gitspace master'
+alias gpOG='git push -v origin master && git push -v gitspace master'
 
 
 # Aliases
@@ -106,9 +106,9 @@ alias gdw='git diff --word-diff'
 gdv() { git diff -w "$@" | view - }
 compdef _git gdv=git-diff
 
-alias gf='git fetch'
-alias gfa='git fetch --all --prune'
-alias gfo='git fetch origin'
+alias gf='git fetch -v'
+alias gfa='git fetch --all --prune -v'
+alias gfo='git fetch -v origin'
 
 function gfg() { git ls-files | grep $@ }
 compdef _grep gfg
@@ -160,14 +160,14 @@ compdef _git ggu=git-checkout
 alias ggpur='ggu'
 compdef _git ggpur=git-checkout
 
-alias ggpull='git pull origin $(git_current_branch)'
+alias ggpull='git pull -v origin $(git_current_branch)'
 compdef _git ggpull=git-checkout
 
-alias ggpush='git push origin $(git_current_branch)'
+alias ggpush='git push -v origin $(git_current_branch)'
 compdef _git ggpush=git-checkout
 
 alias ggsup='git branch --set-upstream-to=origin/$(git_current_branch)'
-alias gpsup='git push --set-upstream origin $(git_current_branch)'
+alias gpsup='git push -v --set-upstream origin $(git_current_branch)'
 
 alias ghh='git help'
 
@@ -181,7 +181,7 @@ compdef _git gk='gitk'
 alias gke='\gitk --all $(git log -g --pretty=%h)'
 compdef _git gke='gitk'
 
-alias gl='git pull'
+alias gl='git pull -v'
 alias glg='git log --stat'
 alias glgp='git log --stat -p'
 alias glgg='git log --graph'
@@ -197,20 +197,20 @@ alias gloga='git log --oneline --decorate --graph --all'
 alias glp="_git_log_prettily"
 compdef _git glp=git-log
 
-alias gm='git merge'
-alias gmom='git merge origin/master'
+alias gm='git merge -v'
+alias gmom='git merge -v origin/master'
 alias gmt='git mergetool --no-prompt'
 alias gmtvim='git mergetool --no-prompt --tool=vimdiff'
-alias gmum='git merge upstream/master'
+alias gmum='git merge -v upstream/master'
 
-alias gp='git push'
-alias gpd='git push --dry-run'
-alias gpoat='git push origin --all && git push origin --tags'
+alias gp='git push -v'
+alias gpd='git push -v --dry-run'
+alias gpoat='git push -v origin --all && git push -v origin --tags'
 compdef _git gpoat=git-push
-alias gpu='git push upstream'
+alias gpu='git push -v upstream'
 alias gpv='git push -v'
 
-alias gr='git remote'
+alias gr='git remote -v'
 alias gra='git remote add'
 alias grb='git rebase'
 alias grba='git rebase --abort'
@@ -225,7 +225,7 @@ alias grrm='git remote remove'
 alias grset='git remote set-url'
 alias grt='cd $(git rev-parse --show-toplevel || echo ".")'
 alias gru='git reset --'
-alias grup='git remote update'
+alias grup='git remote -v update'
 alias grv='git remote -v'
 
 alias gsb='git status -sb'
@@ -249,9 +249,9 @@ alias gtv='git tag | sort -V'
 
 alias gunignore='git update-index --no-assume-unchanged'
 alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
-alias gup='git pull --rebase'
+alias gup='git pull -v --rebase'
 alias gupv='git pull --rebase -v'
-alias glum='git pull upstream master'
+alias glum='git pull -v upstream master'
 
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify -m "--wip-- [skip ci]"'
