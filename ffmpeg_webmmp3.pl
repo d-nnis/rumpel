@@ -21,11 +21,12 @@ if ($1) {
 }
 $output .= ".mp3";
 
-say "Inside Perl";
+# TODO: check if ffmpeg and libmp3lame exists
 my $exec = "ffmpeg -i '$input' -acodec libmp3lame -aq $aq '$output'";
 
-my $ec = `$exec`;
-say "errorcode:-$?-";
+my $exec_output = `$exec`;
+my $ec = $?;
+say "errorcode:$ec";
 
 if ($ec) {
   say "There was an error:$ec";
