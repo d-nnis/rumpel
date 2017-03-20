@@ -42,7 +42,9 @@ function work_in_progress() {
 # (g)it (f)etch (m)erge including (S)ubmodule
 ## So this command to get the status of last pushed commit: git pull && git submodule update --init --recursive
 ## +git pull && git submodule foreach pull origin master+ would fetch, merge and checkout the newest commit from upstream, even if the registered commit in the supermodule (containing repo) ist different.
-alias gfmS='git pull -v && git submodule update --init --recursive'
+#alias gfmS='git pull -v && git submodule update --init --recursive'
+## update: update checks out the commit registered in the supermodule, leaving HEAD detached. _--merge_ will merge master with the checked out commit
+alias gfmS='git pull -v && git submodule update --init --recursive --merge'
 #alias gfmSfm='git pull && git submodule foreach pull origin master'
 alias gpOG='git push -v origin master && git push -v gitspace master'
 
