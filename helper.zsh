@@ -29,3 +29,14 @@ hardcopy() {
   man -t $prog | lpr $@
 }
 
+# TODO
+# tar -czf - * | ssh uta@delle tar -xzf - -C /home/uta/backup_freddy/
+copyfast() {
+  :
+  #tar -czf - * | ssh uta@delle tar -xzf - -C /home/uta/backup_freddy/ 
+}
+
+# search dotfiles et al for TODO entries and list them
+todoparser() {
+  :
+}
