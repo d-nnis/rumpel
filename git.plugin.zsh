@@ -47,6 +47,8 @@ function work_in_progress() {
 alias gfmS='git pull -v && git submodule update --init --recursive --merge'
 #alias gfmSfm='git pull && git submodule foreach pull origin master'
 alias gpOG='git push -v origin master && git push -v gitspace master'
+# show urls of submodules
+alias gSurl='git submodule foreach git config remote.origin.url'
 
 
 # Aliases
