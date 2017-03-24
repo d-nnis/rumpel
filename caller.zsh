@@ -13,3 +13,8 @@ ffmpeg_webm() {
     exit 1
   fi
 }
+
+gpSOG() {
+  $abspath/git_submodule_path.pl | $abspath/git_has_gitspace.pl | $abspath/git_gpOG.pl
+}
+
