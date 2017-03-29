@@ -40,3 +40,8 @@ copyfast() {
 todoparser() {
   :
 }
+
+# TODO: which: take a stream of filenames and resolve into full paths
+W() {
+  :
+}
