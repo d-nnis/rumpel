@@ -41,7 +41,10 @@ todoparser() {
   :
 }
 
-# TODO: which: take a stream of filenames and resolve into full paths
-W() {
-  :
+# which: take a stream of filenames and resolve into full paths
+whichpipe() {
+  for file in $*; do
+    which $file
+  done
 }
+
