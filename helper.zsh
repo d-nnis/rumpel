@@ -48,3 +48,52 @@ whichpipe() {
   done
 }
 
+## git hide project (TODO)
+git_toplevel() {
+  echo `git rev-parse --show-toplevel`
+}
+
+git_hidefile() {
+  tohide=$1
+  echo hide me $tohide !
+  if [ -z $tohide ]; then
+    echo need one file name
+    exit 1
+  elif [ ! -e $tohide ]; then
+    echo file/ dir $tohide does not exist
+    exit 2
+  fi
+  gtl=`git_toplevel`
+  githide=`git_toplevel`/.githide
+
+  if [ ! -e $githide ]; then
+    touch $githide
+    echo "$tohide" | tee $githide > /dev/null
+    echo "done"
+    exit 0
+  fi
+  unset args
+  orgIFS=$IFS
+  while IFS= read -r line; do
+    args+=("$line") 
+  done < $githide
+  IFS=$orgIFS
+  append=1
+  echo "we want to hide $tohide this"
+  for gh in $args; do
+    echo $gh
+    if [ "$gh" = "$tohide" ]; then
+      echo $tohide is in $githide
+      append=0
+      break
+    fi
+  done
+  if [ "$append" -eq 1 ]; then
+    echo "$tohide" | tee -a $githide > /dev/null
+    echo "appended $todhide to $githide"
+    echo done
+  else
+    echo "nothing to append"
+  fi
+}
+
