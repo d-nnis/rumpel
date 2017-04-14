@@ -49,51 +49,90 @@ whichpipe() {
 }
 
 ## git hide project (TODO)
+# integrate with gfmS: git submodule foreach git_hide
 git_toplevel() {
   echo `git rev-parse --show-toplevel`
 }
 
-git_hidefile() {
-  tohide=$1
-  echo hide me $tohide !
-  if [ -z $tohide ]; then
-    echo need one file name
-    exit 1
-  elif [ ! -e $tohide ]; then
-    echo file/ dir $tohide does not exist
-    exit 2
-  fi
-  gtl=`git_toplevel`
-  githide=`git_toplevel`/.githide
+git_showhidden() {
+  # files=() declares files to be an array
+  files=($(git ls-files -v | grep "^[[:lower:]]" | sed 's/h //'))
+#  for file in $files; do
+#    echo $file
+#  done
+  echo "${files[@]}"
+}
 
-  if [ ! -e $githide ]; then
-    touch $githide
-    echo "$tohide" | tee $githide > /dev/null
-    echo "done"
-    exit 0
-  fi
-  unset args
-  orgIFS=$IFS
-  while IFS= read -r line; do
-    args+=("$line") 
-  done < $githide
-  IFS=$orgIFS
-  append=1
-  echo "we want to hide $tohide this"
-  for gh in $args; do
-    echo $gh
-    if [ "$gh" = "$tohide" ]; then
-      echo $tohide is in $githide
-      append=0
-      break
+git_unhideall() {
+  files=($(git_showhidden))
+  for file in $files; do
+    git update-index --no-assume-unchanged "$file"
+    if [ "$?" -gt "0" ]; then
+      echo "could not unhide $file"
+    else
+      echo "unhid $file"
     fi
   done
-  if [ "$append" -eq 1 ]; then
-    echo "$tohide" | tee -a $githide > /dev/null
-    echo "appended $todhide to $githide"
-    echo done
-  else
-    echo "nothing to append"
+}
+
+git_hide() {
+  gtl=$(git_toplevel)
+  echo $gtl
+  githide=$(git_toplevel)/.githide
+
+  if [ ! -e $githide ]; then
+    echo "no " `basename "$githide"` "file"
+    echo "unhide all, if any:"
+    git_unhideall
+    return 0
   fi
+
+  # splits at every space as well
+  #tohide=($(less $githide))
+  # splits only at newlines (f)
+  tohide=("${(@f)$(less $githide)}")
+  
+  # element 0 of array is empty
+  if [ -z $tohide[1] ]; then
+    echo file $githide is empty
+    echo exiting
+    return 0
+  else
+    files=($(git_showhidden))
+    echo "hidden files before:"
+    if [ -z $files[1] ]; then
+      echo NONE
+    else
+      for file in $files; do
+        echo $file
+      done
+    fi
+    echo "reset git's update-index"
+    # gunhide-all > /dev/null
+    git_unhideall
+  fi
+  rt_err=0
+  # TOSORT: zmodload necessary?
+  zmodload zsh/pcre
+  for gh in $tohide; do
+    if [[ "$gh" -pcre-match ^#.* ]]; then
+      continue
+    fi
+    echo hide $gh
+    # ghide $gh
+    git update-index --assume-unchanged "$gh"
+    err=$?
+    if [ "$err" -gt "0" ]; then
+      echo git return code: $err
+      echo "file $gh is probably not part of git's index"
+      rt_err=1
+    fi
+  done
+  if [ "$rt_err" -gt "0" ]; then
+    echo there was an error
+    return 1
+  fi
+  echo "done, exiting"
+  return 0
 }
 
