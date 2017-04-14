@@ -57,6 +57,8 @@ git_toplevel() {
 git_showhidden() {
   # files=() declares files to be an array
   files=($(git ls-files -v | grep "^[[:lower:]]" | sed 's/h //'))
+  # alternativ mit awk:
+  #files=($(git ls-files -v | grep "^[[:lower:]]" | awk '{print $2}'))
 #  for file in $files; do
 #    echo $file
 #  done
