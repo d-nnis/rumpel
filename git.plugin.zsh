@@ -178,9 +178,13 @@ alias ghh='git help'
 #alias gignore='git update-index --assume-unchanged'
 #alias gignored='git ls-files -v | grep "^[[:lower:]]"'
 alias ghide='git update-index --assume-unchanged'
-alias gshidden='git ls-files -v | grep "^[[:lower:]]"'
+#alias gshidden='git ls-files -v | grep "^[[:lower:]]"'
+alias gshidden='git_showhidden'
 alias gunhide='git update-index --no-assume-unchanged'
-alias gunhide-all='git update-index --really-refresh'
+# doesnt work really: alias gunhide-all='git update-index --really-refresh'
+# function in helper.zsh
+alias gunhide-all='git_unhideall'
+alias ghide-all='git_hide'
 
 alias git-svn-dcommit-push='git svn dcommit && git push github master:svntrunk'
 compdef _git git-svn-dcommit-push=git
