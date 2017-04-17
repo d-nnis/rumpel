@@ -45,6 +45,7 @@ function work_in_progress() {
 #alias gfmS='git pull -v && git submodule update --init --recursive'
 ## update: update checks out the commit registered in the supermodule, leaving HEAD detached. _--merge_ will merge master with the checked out commit
 alias gfmS='git pull -v && git submodule update --init --recursive --merge'
+
 #alias gfmSfm='git pull && git submodule foreach pull origin master'
 alias gpOG='git push -v origin master && git push -v gitspace master'
 # show urls of submodules
