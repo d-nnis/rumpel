@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-abspath=$0:h
+local abspath=$0:h
 
 ffmpeg_webm() {
   if [ -f $(which ffmpeg) ]; then
