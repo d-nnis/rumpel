@@ -138,3 +138,5 @@ git_hide() {
   return 0
 }
 
+#TODO: mass kill machine à la:
+#psaux G firefox | cut -d" " -f5 | xargs sudo kill -9
