@@ -215,3 +215,10 @@ function git_current_user_email() {
 POST_1_7_2_GIT=$(git_compare_version "1.7.2")
 # Clean up the namespace slightly by removing the checker function
 unfunction git_compare_version
+
+#TODO: if HEAD (no branch): get commit hash, checkout master, merge with hash
+# or: checkout master, pull
+# git merge master does not work backwards
+# no native git automatic function for this??
+#
+#
