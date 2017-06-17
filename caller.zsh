@@ -1,8 +1,9 @@
 #!/usr/bin/env zsh
 
-local abspath=$0:h
-
 ffmpeg_webm() {
+  local abspath=${(%):-%x}
+  local abspath=$(dirname $abspath)
+  echo location of called script: $abspath
   if [ -f $(which ffmpeg) ]; then
     for file in $*; do
       echo $file
